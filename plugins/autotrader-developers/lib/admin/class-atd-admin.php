@@ -11,5 +11,8 @@
  */
 class AT_Init
 {
-
+    public function scheduler_admin_actions()
+    {
+        add_options_page( 'Dump-It Scheduling', 'Dump-It Schedule', 'Administrator', 'Dump-It_Master_Schedule' );
+    }
 }
