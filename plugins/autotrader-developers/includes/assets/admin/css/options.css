@@ -1,0 +1,27 @@
+.at_options_wrapper {
+    width: 98%;
+}
+
+.sortable {
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sortable li {
+    float: left;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border: 1px solid red;
+    text-align: center;
+    margin: 5px;
+}
+
+li.sortable-placeholder {
+    border: 1px dashed #CCC;
+    background: none;
+}
