@@ -3,3 +3,5 @@ plugins/autotrader-developers/node_modules/
 plugins/autotrader-developers/gulpfile.js
 plugins/autotrader-developers/package-lock.json
 plugins/autotrader-developers/package.json
+uploads
+uploads/
