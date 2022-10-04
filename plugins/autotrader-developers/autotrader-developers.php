@@ -19,18 +19,19 @@
  * Network:              true
  */
 
-function run_better_search_replace()
-{
+define( 'ATD_FILE', __FILE__ );
+define( 'ATD_PATH', plugin_dir_path( ATD_FILE ) );
+define( 'ATD_URL', plugin_dir_url( ATD_FILE ) );
+define( 'ATD_VERSION', '1.0.0' );
 
-    define( 'ATD_FILE', __FILE__ );
-    define( 'ATD_PATH', plugin_dir_path( ATD_FILE ) );
-    define( 'ATD_URL', plugin_dir_url( ATD_FILE ) );
-    define( 'ATD_VERSION', '1.0.0' );
+// require ATD_PATH . 'includes/admin/class-atd-admin.php';
 
-    require ATD_PATH . 'lib/admin/class-atd-admin.php';
-    // $plugin = new Better_Search_Replace();
-    // $plugin->run();
-
+if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+    require_once ATD_PATH . 'class.autotrader-developers.admin.core.php';
+    add_action( 'init', ['AutoTrader_Admin', 'init'] );
 }
 
-add_action( 'after_setup_theme', 'run_better_search_replace' );
+if ( !is_admin() ) {
+    require_once ATD_PATH . 'class.autotrader-developers.core.php';
+    add_action( 'init', ['AutoTrader', 'init'] );
+}
