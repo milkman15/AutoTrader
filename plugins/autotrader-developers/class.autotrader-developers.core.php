@@ -18,7 +18,6 @@ class AutoTrader
     {
 
         if ( !self::$__initiated ) {
-            self::load_resources();
             self::__init_hooks();
         }
     }
