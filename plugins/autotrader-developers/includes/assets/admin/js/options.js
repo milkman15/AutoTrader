@@ -32,12 +32,11 @@ jQuery(function ($) {
                 let imageId = image.toJSON().id.toString();
                 if (!existingIds.includes(imageId)) {
                     attachmentIds.push(imageId);
-                    document.querySelector('#at-gallery-preview').innerHTML += (`<div class="at-gallery-image" data-attachId="${imageId}"><a href="#" class="at-remove">Remove image</a><img src="${imageUrl}" alt="${imageAlt}" width="300" /></div>`);
+                    document.querySelector('ul.sortable').innerHTML += (`<li class="ui-state-default ui-sortable-handle"><div class="at-gallery-image" data-attachId="${imageId}"><a href="#" class="at-remove">Remove image</a><img src="${imageUrl}" alt="${imageAlt}" width="300" /></div></li>`);
                 }
             })
             button.html('Add more images');
             $('.at-remove').show();
-            console.log(attachmentIds.join());
             $('#at-gallery-file').val($('#at-gallery-file').val() + "," + attachmentIds.join());
         })
 
@@ -63,11 +62,28 @@ jQuery(function ($) {
         let oldVals = document.querySelector('#at-gallery-file').value.split(',');
         let newVal = oldVals.filter(val => val !== button.closest('.at-gallery-image')[0].dataset.attachid);
         document.querySelector('#at-gallery-file').value = newVal;
-        button.closest('.at-gallery-image').remove();
+        button.closest('li').remove();
 
 
         if (document.querySelectorAll('.at-gallery-image').length === 0) {
             $('.at-upload').html('Upload image(s)');
         }
+    });
+
+    $(function () {
+        $(".sortable").sortable({
+            update: function () {
+                const existingIds = [];
+                const existingImages = document.querySelectorAll('.at-gallery-image');
+
+                if (existingImages && existingImages.length > 0) {
+                    [...existingImages].map(images => {
+                        existingIds.push(images.dataset.attachid);
+                    })
+                }
+
+                $('#at-gallery-file').val(existingIds.join());
+            }
+        });
     });
 });
